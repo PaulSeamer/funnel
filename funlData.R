@@ -117,7 +117,7 @@ funl_Data <- function(df.data, col.unit, col.group, col.O, col.n, col.rt
     )
 
   # create df for units and in-control T/F
-  units <- as_tibble(df.data[[col.unit]], stringsAsFactors = FALSE)
+  units <- as_tibble(df.data[[col.unit]])
   names(units) <- col.unit
   
   # apply poisson.test to observed event values in input df
@@ -130,8 +130,8 @@ funl_Data <- function(df.data, col.unit, col.group, col.O, col.n, col.rt
   units$status <- ifelse(df.data[[col.rt]] < units$threeSigmaLow, "low", ifelse(df.data[[col.rt]] > units$threeSigmaHigh, "high", "in"))
     
   # return list of fnl & units
-  fnl <- as_tibble(fnlOut)
-  results <- list(fnl, units)
+  funls <- as_tibble(funls)
+  results <- list(funls, units)
   return(results)
   
   }
